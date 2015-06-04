@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Generate websocket server:
+
+    $ rails generate meteorite:websocket
 
 ## Contributing
 
