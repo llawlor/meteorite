@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Meteorite::VERSION
   spec.authors       = ["llawlor"]
   spec.email         = ["primemod3@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Uses websockets to update HTML pages automatically when the underlying model changes.}
+  spec.summary       = %q{Two-way data binding for Rails}
   spec.homepage      = ""
   spec.license       = "MIT"
 
