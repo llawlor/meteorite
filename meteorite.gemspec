@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_runtime_dependency "em-websocket"
   spec.add_runtime_dependency "em-hiredis"
+  spec.add_dependency "railties"
 end
