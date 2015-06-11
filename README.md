@@ -10,17 +10,16 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install meteorite
+    $ bundle install
 
 ## Usage
 
 Generate websocket server:
 
     $ rails generate meteorite:websocket
+    
+The JavaScript file needs to be added to the assets pipeline.  In app/assets/javascripts/application.js, add this line:
+    //= require meteorite
 
 ## Contributing
 
