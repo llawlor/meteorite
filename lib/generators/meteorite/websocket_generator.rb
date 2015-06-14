@@ -1,7 +1,8 @@
 require 'rails/generators/base'
 
 module Meteorite
-  class WebsocketGenerator < Rails::Generators::Base
+  
+  class WebsocketGenerator < ::Rails::Generators::Base
   
     desc "This generator creates a websocket.rb file at daemons/"
 
@@ -12,4 +13,5 @@ module Meteorite
     end
 
   end
+  
 end
