@@ -25,8 +25,10 @@ In view pages, subscribe to changes (replace MODEL_INSTANCE with an actual insta
 ```javascript
 <script>
   ws.onopen = function() {
-    // listen to changes
-    ws.send(JSON.stringify({ action: 'subscribe', key: '<%= Meteorite.bind_key(@MODEL_INSTANCE.first) %>' }));
+    ws.send(JSON.stringify({ 
+      action: 'subscribe',
+      key: '<%= Meteorite.bind_key(@MODEL_INSTANCE.first) %>'
+    }));
   }
 </script>
 ```
