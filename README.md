@@ -22,14 +22,14 @@ The JavaScript file needs to be added to the assets pipeline.  In app/assets/jav
     //= require meteorite
 
 In view pages, subscribe to changes (replace MODEL_INSTANCE with an actual instance of your model):
-<pre>
-  <script>
-    ws.onopen = function() {
-      // listen to changes
-      ws.send(JSON.stringify({ action: 'subscribe', key: '<%= Meteorite.bind_key(@MODEL_INSTANCE.first) %>' }));
-    }
-  </script>
-</pre>
+```javascript
+<script>
+  ws.onopen = function() {
+    // listen to changes
+    ws.send(JSON.stringify({ action: 'subscribe', key: '<%= Meteorite.bind_key(@MODEL_INSTANCE.first) %>' }));
+  }
+</script>
+```
 
 ## Contributing
 
