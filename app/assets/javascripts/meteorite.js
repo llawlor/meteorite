@@ -3,12 +3,6 @@ var ws = new WebSocket("ws://192.168.56.101:8080/");
 
 console.log('starting meteorite websockets. . .');
 
-// when the websocket is opened
-ws.onopen = function() {
-  // listen to changes
-  ws.send(JSON.stringify({ action: 'subscribe', key: 'mykey' }));
-}
-
 ws.onmessage = function(msg) {
   // parse the json message
   // todo: handle non-json messages
