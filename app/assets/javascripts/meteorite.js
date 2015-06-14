@@ -8,6 +8,9 @@ ws.onmessage = function(msg) {
   // todo: handle non-json messages
   var json = JSON.parse(msg.data);
   
+  // log the data
+  console.log(json);
+  
   // for each meteorite class
   $('.meteorite').each(function() {
     // if the bind keys match
