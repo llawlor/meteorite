@@ -21,6 +21,14 @@ Generate websocket server:
 The JavaScript file needs to be added to the assets pipeline.  In app/assets/javascripts/application.js, add this line:
     //= require meteorite
 
+In view pages, subscribe to changes (replace MODEL_INSTANCE with an actual instance of your model):
+  <script>
+    ws.onopen = function() {
+      // listen to changes
+      ws.send(JSON.stringify({ action: 'subscribe', key: '<%= Meteorite.bind_key(@MODEL_INSTANCE.first) %>' }));
+    }
+  </script>
+
 ## Contributing
 
 1. Fork it
