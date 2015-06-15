@@ -26,3 +26,16 @@ ws.onmessage = function(msg) {
     }
   });
 }
+
+// subscribe to events when the websocket is ready
+function subscribe(bind_key) {
+  // set a 5ms timeout
+  setTimeout(function() {
+    // if the websocket is ready
+    if (ws.readyState === 1) {
+      // send the subscribe notice
+      ws.send(JSON.stringify({ action: 'subscribe', key: bind_key }));
+    // try again if not ready
+    } else { subscribe(); }
+  }, 5);
+}
