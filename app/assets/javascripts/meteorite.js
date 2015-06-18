@@ -21,13 +21,11 @@ ws.onmessage = function(msg) {
       // desired attribute
       var bind_attr = $(this).data('bind-attr');
       // get the attribute data
-      var attr_data = JSON.stringify(bind_data[bind_attr]);
-      // update the text attribute
-      $(this).text(attr_data);
-      console.log(bind_attr);
-      console.log(attr_data);
+      var attr_data = bind_data[bind_attr];
+
       // update the property
-      $(this).prop(bind_attr, attr_data);
+      $(this).prop('checked', attr_data);
+      $(this).text(attr_data);
     }
   });
 }
