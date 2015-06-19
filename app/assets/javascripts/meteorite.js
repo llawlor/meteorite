@@ -25,7 +25,10 @@ ws.onmessage = function(msg) {
 
       // update the property
       $(this).prop('checked', attr_data);
+      // update the text
       $(this).text(attr_data);
+      // notify event handlers that a change has occurred
+      $(this).trigger('change');
     }
   });
 }
