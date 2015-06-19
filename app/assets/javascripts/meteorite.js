@@ -16,21 +16,27 @@ ws.onmessage = function(msg) {
     // if the bind keys match
     if ($(this).data('bind-key') === json.bind_key) {
       console.log('bind found');
-      // get the bind data
-      var bind_data = JSON.parse(json.bind_data);
-      // desired attribute
-      var bind_attr = $(this).data('bind-attr');
-      // get the attribute data
-      var attr_data = bind_data[bind_attr];
-
-      // update the property
-      $(this).prop('checked', attr_data);
-      // update the text
-      $(this).text(attr_data);
-      // notify event handlers that a change has occurred
-      $(this).trigger('change');
+      // update the element
+      update(json, $(this));
     }
   });
+}
+
+// update a single item
+function update(json, $element) {
+  // get the bind data
+  var bind_data = JSON.parse(json.bind_data);
+  // desired attribute
+  var bind_attr = $element.data('bind-attr');
+  // get the attribute data
+  var attr_data = bind_data[bind_attr];
+
+  // update the property
+  $element.prop('checked', attr_data);
+  // update the text
+  $element.text(attr_data);
+  // notify event handlers that a change has occurred
+  $element.trigger('change');
 }
 
 // subscribe to events when the websocket is ready
