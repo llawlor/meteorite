@@ -54,15 +54,38 @@ function update(json, $element) {
   $element.trigger('change');
 }
 
-// subscribe to events when the websocket is ready
-function subscribe(bind_key) {
+// when the document is ready
+$(document).on('page:load ready', function() {
+  subscribeAfterWebsocket();
+});
+
+// subscribe to all bind keys of meteorite classes
+function subscribeAll() {
+  // for each meteorite class
+  $('.meteorite').each(function() {
+    // if there is a bind key
+    if ($(this).data('bind-key') !== undefined) {
+      // subscribe
+      subscribe($(this).data('bind-key'));
+    }
+  });
+}
+
+// wait for websocket to be ready, then subscribe all
+function subscribeAfterWebsocket() {
   // set a 5ms timeout
   setTimeout(function() {
     // if the websocket is ready
     if (ws.readyState === 1) {
-      // send the subscribe notice
-      ws.send(JSON.stringify({ action: 'subscribe', key: bind_key }));
+      // send the subscribe notices
+      subscribeAll();
     // try again if not ready
-    } else { subscribe(); }
+    } else { subscribeAfterWebsocket(); }
   }, 5);
+}
+
+// subscribe to events when the websocket is ready
+function subscribe(bind_key) {
+  // send the subscribe notice
+  ws.send(JSON.stringify({ action: 'subscribe', key: bind_key }));
 }
