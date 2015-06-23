@@ -16,13 +16,28 @@ ws.onmessage = function(msg) {
     // if the bind keys match
     if ($(this).data('bind-key') === json.bind_key) {
       console.log('bind found');
-      // update the element
-      update(json, $(this));
+      
+      // if there is no bind-attr present, this is a collection
+      if ($(this).data('bind-attr') === undefined) {
+        add(json, $(this));
+      // else update the element
+      } else {
+        update(json, $(this));
+      }
+      
     }
   });
 }
 
-// update a single item
+// add an item
+function add(json, $element) {
+  // add to the dom
+  $element.append(json.bind_data);
+  // listen to subscribe events
+  subscribe($(json.bind_data).find('.meteorite').data('bind-key'));  
+}
+
+// update a single attribute
 function update(json, $element) {
   // get the bind data
   var bind_data = JSON.parse(json.bind_data);
