@@ -1,9 +1,13 @@
+// meteorite namespace
+var Meteorite = Meteorite || {};
+
 // initialize websocket
-var ws = new WebSocket("ws://192.168.56.101:8080/");
+Meteorite.websocket = new WebSocket("ws://192.168.56.101:8080/");
 
 console.log('starting meteorite websockets. . .');
 
-ws.onmessage = function(msg) {
+// when a new websocket message is received
+Meteorite.websocket.onmessage = function(msg) {
   // parse the json message
   // todo: handle non-json messages
   var json = JSON.parse(msg.data);
@@ -27,10 +31,10 @@ ws.onmessage = function(msg) {
       
       // if there is no bind-attr present, this is a collection
       if ($(this).data('bind-attr') === undefined) {
-        add(json, $(this));
+        Meteorite.add(json, $(this));
       // else update the element
       } else {
-        update(json, $(this));
+        Meteorite.update(json, $(this));
       }
       
     }
@@ -38,15 +42,15 @@ ws.onmessage = function(msg) {
 }
 
 // add an item
-function add(json, $element) {
+Meteorite.add = function(json, $element) {
   // add to the dom
   $element.append(json.bind_data);
   // listen to subscribe events
-  subscribe($(json.bind_data).find('.meteorite').data('bind-key'));  
+  Meteorite.subscribe($(json.bind_data).find('.meteorite').data('bind-key'));  
 }
 
 // update a single attribute
-function update(json, $element) {
+Meteorite.update = function(json, $element) {
   // get the bind data
   var bind_data = JSON.parse(json.bind_data);
   // desired attribute
@@ -62,38 +66,38 @@ function update(json, $element) {
   $element.trigger('change');
 }
 
-// when the document is ready
-$(document).on('page:load ready', function() {
-  subscribeAfterWebsocket();
-});
-
 // subscribe to all bind keys of meteorite classes
-function subscribeAll() {
+Meteorite.subscribeAll = function() {
   // for each meteorite class
   $('.meteorite').each(function() {
     // if there is a bind key
     if ($(this).data('bind-key') !== undefined) {
       // subscribe
-      subscribe($(this).data('bind-key'));
+      Meteorite.subscribe($(this).data('bind-key'));
     }
   });
 }
 
 // wait for websocket to be ready, then subscribe all
-function subscribeAfterWebsocket() {
+Meteorite.subscribeAfterWebsocket = function() {
   // set a 5ms timeout
   setTimeout(function() {
     // if the websocket is ready
-    if (ws.readyState === 1) {
+    if (Meteorite.websocket.readyState === 1) {
       // send the subscribe notices
-      subscribeAll();
+      Meteorite.subscribeAll();
     // try again if not ready
     } else { subscribeAfterWebsocket(); }
   }, 5);
 }
 
 // subscribe to events when the websocket is ready
-function subscribe(bind_key) {
+Meteorite.subscribe = function(bind_key) {
   // send the subscribe notice
-  ws.send(JSON.stringify({ action: 'subscribe', key: bind_key }));
+  Meteorite.websocket.send(JSON.stringify({ action: 'subscribe', key: bind_key }));
 }
+
+// when the document is ready
+$(document).on('page:load ready', function() {
+  Meteorite.subscribeAfterWebsocket();
+});
