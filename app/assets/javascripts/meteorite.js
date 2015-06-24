@@ -11,6 +11,14 @@ ws.onmessage = function(msg) {
   // log the data
   console.log(json);
   
+  // if this is a delete
+  if (json.bind_data === 'delete') {
+    // remove the item
+    $('#' + json.bind_key).remove();
+    // halt further processing
+    return false;
+  }
+  
   // for each meteorite class
   $('.meteorite').each(function() {
     // if the bind keys match
