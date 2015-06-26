@@ -8,11 +8,11 @@ You need Redis installed and running for Meteorite to work properly.
 
 Install Redis server (on Ubuntu):
 
-    sudo apt-get install redis-server
+    $ sudo apt-get install redis-server
 
 Run Redis server:
 
-    nohup redis-server &
+    $ nohup redis-server &
 
 ## Installation
 
@@ -34,7 +34,7 @@ The generated JavaScript file needs to be added to the assets pipeline.  In app/
 
 Run the websocket daemon:
 
-    ruby daemons/websocket.rb
+    $ ruby daemons/websocket.rb
 
 ## Example Usage in a Task Model
 
