@@ -1,6 +1,7 @@
 # Meteorite
 
 Meteorite enables you to add two-way data binding to your application with minimal effort.
+For an example application, please see https://github.com/llawlor/meteorite-simple-todos .
 
 ## Dependencies
 
