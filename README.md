@@ -6,10 +6,12 @@ Meteorite enables you to add two-way data binding to your application with minim
 
 You need Redis installed and running for Meteorite to work properly.
 
-Install Redis server (on Ubuntu): 
+Install Redis server (on Ubuntu):
+
     sudo apt-get install redis-server
 
 Run Redis server:
+
     nohup redis-server &
 
 ## Installation
