@@ -29,9 +29,11 @@ Install required files:
     $ rails generate meteorite:install
     
 The generated JavaScript file needs to be added to the assets pipeline.  In app/assets/javascripts/application.js, add this line:
+
     //= require meteorite
 
 Run the websocket daemon:
+
     ruby daemons/websocket.rb
 
 ## Example Usage in a Task Model
