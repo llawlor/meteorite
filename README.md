@@ -7,10 +7,10 @@ Meteorite enables you to add two-way data binding to your application with minim
 You need Redis installed and running for Meteorite to work properly.
 
 Install Redis server (on Ubuntu): 
-sudo apt-get install redis-server
+    sudo apt-get install redis-server
 
 Run Redis server:
-nohup redis-server &
+    nohup redis-server &
 
 ## Installation
 
@@ -89,7 +89,7 @@ $redis.publish(Meteorite.bind_key(task), 'delete')
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-Items that contributors can help with:
+### Items that contributors can help with:
 1. Tests
 2. Examples
 
