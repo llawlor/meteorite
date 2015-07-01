@@ -50,8 +50,9 @@ The Redis server location can be configured at config/initializers/meteorite.rb 
 First, we publish a message to Redis with a key of 'tasks' and a value equal to the task's partial.
 Meteorite.bind_key(MODEL_NAME.all) will use the table name as the key to bind messages to.
 
-task_controller#create
 ```ruby
+# task_controller#create
+
 # create the task
 task = Task.create(task_params)
 # render the partial to a string
@@ -62,8 +63,9 @@ $redis.publish(Meteorite.bind_key(Task.all), task_string)
 
 An HTML element with a class of "meteorite" and data attribute for the bind key is used to specify where additional model instances will be added to the DOM.
 
-tasks/index.html.erb
 ```html
+<!-- tasks/index.html.erb -->
+
 <table class="meteorite" data-bind-key="<%= Meteorite.bind_key(@tasks) %>">
   <% @tasks.each do |task| %>
     <%= render partial: 'task', locals: { task: task } %>
@@ -74,8 +76,9 @@ tasks/index.html.erb
 The partial should have a top-level element with an ID of the model instance's bind key.
 Individual HTML attributes can be dynamically updated by adding a "meteorite" class, data-bind-key, and data-bind-attr. 
 
-tasks/_task.html.erb
 ```html
+<!-- tasks/_task.html.erb -->
+
 <tr id="<%= Meteorite.bind_key(task) %>">
   <td>
     <%= form_for task, remote: true, html: { style: 'float: left; margin-right: 5px;' } do |f| %>
@@ -97,8 +100,9 @@ tasks/_task.html.erb
 
 Updates can be performed by publishing the model instance's bind key and the model instance to JSON.
 
-tasks_controller#update
 ```ruby
+# tasks_controller#update
+
 # use the $redis.publish method to send your bind_key and task as JSON
 task = Task.find(params[:id])
 $redis.publish(Meteorite.bind_key(task), task.to_json)
@@ -110,8 +114,9 @@ $redis.publish(Meteorite.bind_key(task), task.to_json)
 
 Model instances can be deleted by publishing the model instance's bind key and the 'delete' message.
 
-tasks_controller#destroy
 ```ruby
+# tasks_controller#destroy
+
 # use the $redis.publish method to send your bind_key and 'delete' message
 task = Task.find(params[:id])
 $redis.publish(Meteorite.bind_key(task), 'delete')
