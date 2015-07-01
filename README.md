@@ -29,6 +29,8 @@ Install required files:
 
     $ rails generate meteorite:install
     
+[(view diff)](https://github.com/llawlor/meteorite-tasks-example/commit/adb20f19b8bd6034ea6ef81a4618f359e9b93222?diff=unified)
+    
 The generated JavaScript file needs to be added to the assets pipeline.  In app/assets/javascripts/application.js, add this line:
 
     //= require meteorite
