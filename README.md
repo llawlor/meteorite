@@ -83,6 +83,8 @@ task = Task.find(params[:id])
 $redis.publish(Meteorite.bind_key(task), task.to_json)
 ```
 
+[(view diff)](https://github.com/llawlor/meteorite-tasks-example/commit/f5a4e21b4b24173c7a4832d954567b616d685b4c)
+
 ### Delete a task:
 tasks_controller#destroy
 ```ruby
