@@ -41,9 +41,15 @@ Run the websocket daemon:
 
     $ ruby daemons/websocket.rb
 
+The Redis server location can be configured at config/initializers/meteorite.rb .
+
 ## Example Usage in a Task Model
 
 ### Create a task:
+
+First, we publish a message to Redis with a key of 'tasks' and a value equal to the task's partial.
+Meteorite.bind_key(MODEL_NAME.all) will use the table name as the key to bind messages to.
+
 task_controller#create
 ```ruby
 # create the task
@@ -54,6 +60,8 @@ task_string = render_to_string(partial: 'task', locals: { task: task })
 $redis.publish(Meteorite.bind_key(Task.all), task_string)
 ```
 
+An HTML element with a class of "meteorite" and data attribute for the bind key is used to specify where additional model instances will be added to the DOM.
+
 tasks/index.html.erb
 ```html
 <table class="meteorite" data-bind-key="<%= Meteorite.bind_key(@tasks) %>">
@@ -63,19 +71,32 @@ tasks/index.html.erb
 </table>
 ```
 
+The partial should have a top-level element with an ID of the model instance's bind key.
+Individual HTML attributes can be dynamically updated by adding a "meteorite" class, data-bind-key, and data-bind-attr. 
+
 tasks/_task.html.erb
 ```html
-<%= form_for task do |f| %>
-  <label>
-    <%= f.check_box :checked, class: 'meteorite', data: { bind_key: Meteorite.bind_key(task), bind_attr: 'checked' } %>
-    <%= task.text %>
-  </label>
+<tr id="<%= Meteorite.bind_key(task) %>">
+  <td>
+    <%= form_for task, remote: true, html: { style: 'float: left; margin-right: 5px;' } do |f| %>
+      <label>
+        <%= f.check_box :checked, class: 'task_check meteorite', data: { bind_key: Meteorite.bind_key(task), bind_attr: 'checked' } %>
+        <span class="checkbox_text <%= 'checked' if task.checked?%>"><%= task.text %></span>
+      </label>
+    <% end %>
+    
+    <%= link_to raw("&times;"), task, method: 'delete', data: { remote: true }, class: 'pull-right' %>
+  </td>
+</tr>
 <% end %>
 ```
 
 [(view diff)](https://github.com/llawlor/meteorite-tasks-example/commit/9440626fdc14af5e84066eef60fabf3e99fcfd93)
 
 ### Update a task:
+
+Updates can be performed by publishing the model instance's bind key and the model instance to JSON.
+
 tasks_controller#update
 ```ruby
 # use the $redis.publish method to send your bind_key and task as JSON
@@ -86,6 +107,9 @@ $redis.publish(Meteorite.bind_key(task), task.to_json)
 [(view diff)](https://github.com/llawlor/meteorite-tasks-example/commit/f5a4e21b4b24173c7a4832d954567b616d685b4c)
 
 ### Delete a task:
+
+Model instances can be deleted by publishing the model instance's bind key and the 'delete' message.
+
 tasks_controller#destroy
 ```ruby
 # use the $redis.publish method to send your bind_key and 'delete' message
