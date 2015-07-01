@@ -73,6 +73,8 @@ tasks/_task.html.erb
 <% end %>
 ```
 
+[(view diff)](https://github.com/llawlor/meteorite-tasks-example/commit/9440626fdc14af5e84066eef60fabf3e99fcfd93)
+
 ### Update a task:
 tasks_controller#update
 ```ruby
