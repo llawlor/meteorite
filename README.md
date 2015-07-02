@@ -1,7 +1,8 @@
 # Meteorite
 
 Meteorite enables you to add two-way data binding to your application with minimal effort.
-For an example application, please see https://github.com/llawlor/meteorite-simple-todos .
+For a live demo, please see http://getmeteorite.com/ .  Open up the demo in two different browser windows, make changes in the first browser window and they will instantly appear in the second. 
+The source code for the demo application is available at https://github.com/llawlor/meteorite-simple-todos .
 
 ## Dependencies
 
