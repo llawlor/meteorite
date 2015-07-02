@@ -2,7 +2,7 @@
 var Meteorite = Meteorite || {};
 
 // initialize websocket
-Meteorite.websocket = new WebSocket("ws://192.168.56.101:8080/");
+Meteorite.websocket = new WebSocket("ws://" + location.hostname + ":8080/");
 
 console.log('starting meteorite websockets. . .');
 
