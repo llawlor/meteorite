@@ -87,7 +87,7 @@ Meteorite.subscribeAfterWebsocket = function() {
       // send the subscribe notices
       Meteorite.subscribeAll();
     // try again if not ready
-    } else { subscribeAfterWebsocket(); }
+    } else { Meteorite.subscribeAfterWebsocket(); }
   }, 5);
 }
 
