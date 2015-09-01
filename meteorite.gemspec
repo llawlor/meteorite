@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Meteorite::VERSION
   spec.authors       = ["llawlor"]
   spec.email         = ["primemod3@gmail.com"]
-  spec.description   = %q{Uses websockets to update HTML pages automatically when the underlying model changes.}
-  spec.summary       = %q{Two-way data binding for Rails}
+  spec.description   = %q{Meteorite enables you to add two-way data binding (realtime updates) to your application with minimal effort. }
+  spec.summary       = %q{Two-way realtime data binding for Rails}
   spec.homepage      = ""
   spec.license       = "MIT"
 
