@@ -52,7 +52,7 @@ First, we publish a message to Redis with a key of 'tasks' and a value equal to 
 Meteorite.bind_key(MODEL_NAME.all) will use the table name as the key to bind messages to.
 
 ```ruby
-# task_controller#create
+# tasks_controller#create
 
 # create the task
 task = Task.create(task_params)
