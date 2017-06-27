@@ -4,7 +4,6 @@ This gem has been deprecated, please use Rails 5 ActionCable: edgeguides.rubyonr
 # Meteorite
 
 Meteorite enables you to add two-way data binding (realtime updates) to your application with minimal effort.
-For a live demo, please see http://getmeteorite.com/ .  Open up the demo in two different browser windows, make changes in the first browser window and they will instantly appear in the second. 
 The source code for the demo application is available at https://github.com/llawlor/meteorite-tasks-example .
 
 ## Dependencies
