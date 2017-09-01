@@ -1,4 +1,4 @@
-##Deprecation Notice
+## Deprecation Notice
 This gem has been deprecated, please use Rails 5 ActionCable: edgeguides.rubyonrails.org/action_cable_overview.html
 
 # Meteorite
